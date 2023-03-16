@@ -1,0 +1,3 @@
+-- A good place to put global enums
+PERSON_UNIDENTIFIED = 0
+PERSON_IDENTIFIED = 1

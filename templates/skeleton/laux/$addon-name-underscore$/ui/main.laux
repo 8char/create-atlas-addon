@@ -1,0 +1,22 @@
+local PANEL = {}
+
+function PANEL:Init()
+    self.title = self:Add(Label("Some greetings from people!"))
+
+    self:AddHook("$addon-global$.ReceivePeople", "RecievePeople", (people) ->
+        self:UpdatePeople(people)
+    end)
+end
+
+function PANEL:UpdatePeople(people)
+    self.peoplePanels = {}
+
+    for k, v of people or {} do
+        local greeting = self.people:getHello()
+        local label = Label(greeting)
+
+        self.peoplePanels[k] = self:Add(label)
+    end
+end
+
+vgui.Register("$addon-global$.Main", PANEL)

@@ -1,0 +1,26 @@
+class Person {
+    static ENUMS = {
+        HAPPY = 0,
+        NORMAL = 1,
+        SAD = 2
+    }
+    _get _set fullName
+    _get _set age
+    _get _set mood
+
+    constructor(fullName: string, age: number, mood: number) {
+        self:setFullName(fullName or "John Smith")
+        self:setAge(age or 18)
+        self:setMood(age or self.ENUMS.Normal)
+    }
+
+    getHello() {
+        print(`Hello, my name is {self:getName()}, and I am {self:getAge()}`)
+    }
+
+    __type()
+        return "$addon-global$.Person"
+    end
+}
+
+$addon-glob$.Person = Person

@@ -1,0 +1,20 @@
+AtlasUI.Loader()
+    :setName("$addon-name$")
+    :setAcronym("$addon-acronym$")
+    :setDirectory("$addon-name-underscore$")
+    :setColor(AtlasUI.Theme.Primary)
+    :load("network", {
+        client = ATLASUI_CLIENT,
+        server = ATLASUI_SERVER
+    })
+    :load("classes", ATLASUI_SHARED, true)
+    :load("core/ui", ATLASUI_CLIENT)
+    :loadFile("core/main", ATLASUI_SERVER)
+:done()
+
+
+if (AtlasUI) then
+	Load()
+else
+	hook.Add("AtlasUI.Loaded", "$addon-global$", Load)
+end

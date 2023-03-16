@@ -1,0 +1,10 @@
+local PANEL = {}
+
+function PANEL:Init()
+    frame:SetSize(960, 720)
+    frame:Center()
+    frame:MakePopup()
+    frame:SetTitle("$addon-name$ Panel")
+end
+
+vgui.Register("$addon-global$.Frame", PANEL, "AtlasUI.Frame")

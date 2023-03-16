@@ -1,0 +1,28 @@
+class Network extends AtlasUI.Network
+    constructor(...)
+        super(...)
+
+        self:setPrefix("$addon-global$.")
+
+        self:receiver("Message",    self.receiveMessage)
+        self:receiver("People",     self.receivePeople)
+    end
+
+    receiveMessage(ply)
+        local msg = net.ReadString()
+
+        chat.Add(Color(144, 255, 45), "[$addon-name$] ", Color(255, 255, 255), msg)
+    end
+
+    receivePeople(ply)
+        local people = self:uncompress()
+
+        hook.Run("$addon-global$.ReceivePeople", people)
+    end
+
+    requestPeople(ply)
+        self:send("RequestPeople", () -> end)
+    end
+end
+
+SkillSystem.Network = Network()

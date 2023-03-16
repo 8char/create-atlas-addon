@@ -1,0 +1,44 @@
+class PersonController {
+    _get _set people
+
+    contructor()
+        self:setPeople({})
+    end
+
+    addPerson(name, age, mood)
+        local person = $addon-global$.Person(name, age, mood)
+
+        self:setPeople({
+            ...self:getPeople(),
+            person
+        })
+
+        local key = #self:getPeople()
+
+        return person, key
+    end
+
+    removePersonByValue(person)
+        local people = self:getPeople()
+
+        local key = table.RemoveByValue(people, person)
+        self:setPeople(people)
+
+        return key
+    end
+
+    removePersonByIndex(index)
+        local people = self:getPeople()
+
+        local person = table.remove(people, index)
+        self:setPeople(people)
+
+        return person
+    end
+
+    __type()
+        return "$addon-global$.PersonController"
+    end
+}
+
+$addon-glob$.PersonController = PersonController()

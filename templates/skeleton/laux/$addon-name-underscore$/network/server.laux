@@ -1,0 +1,32 @@
+class Network extends AtlasUI.Network
+    constructor(...)
+        super(...)
+
+        self:setPrefix("$addon-global$.")
+        self:prepare({
+            "Message",
+            "People",
+            "RequestPeople",
+        })
+
+        self:receiver("RequestPeople",  self.receiveRequestPeople)
+    end
+
+    sendMessage(target, msg)
+        self:send("Message", target, () ->
+            net.WriteString(msg)
+        end)
+    end
+
+    sendPeople(target)
+        self:send("People", target, () ->
+            self:compress($addon-global$.PersonController:getPeople())
+        end)
+    end
+
+    receiveRequestPeople(ply)
+        self:sendPeople(ply)
+    end
+end
+
+SkillSystem.Network = Network()

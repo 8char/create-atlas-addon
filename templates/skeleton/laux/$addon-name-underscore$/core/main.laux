@@ -1,0 +1,24 @@
+local PLY = FindMetaTable("Player")
+
+PLY.SendPersonMessage = $addon-global$.Network.sendMessage
+
+hook.Add("PlayerSay", "AddPerson", function(ply, text)
+    stopif not text:split(" ")[1] == "!addperson"
+
+    local pattern = "^!addperson \"([^\"]+)\" (%d+) ([%a]+)$"
+    local fullName, age, mood = text:match(pattern)
+
+    if not ( fullName and age and mood ) then
+        ply:SendPersonMessage("Wrong command format, please use !addperson <Full Name> <Age> <Mood (Happy/Sad/Normal)>")
+        return
+    end
+    
+    $addon-global$.PersonController:addPerson(fullName, age, mood)
+    ply:SendPersonMessage(`Sucessfully added {fullName}`)
+end)
+
+hook.Add("PlayerSay", "AddPerson", function(ply, text)
+    stopif not text:lower() == "!people"
+
+    vgui.Create("$addon-global$.Frame")
+end)

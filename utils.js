@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 /** @param {string} dir */
 export function mkdirp(dir) {
@@ -26,25 +27,28 @@ function identity(x) {
 
 export function copy(from, to, rename = identity) {
     if (!fs.existsSync(from)) return;
-  
+    
     const stack = [{ from, to }];
-  
+    
     while (stack.length > 0) {
-      const { from, to } = stack.pop();
-      const stats = fs.statSync(from);
-  
-      if (stats.isDirectory()) {
-        mkdirp(to);
-        fs.readdirSync(from).forEach((name) => {
-          stack.push({
-            from: path.join(from, name),
-            to: path.join(to, rename(name)),
-          });
-        });
-      } else {
-        mkdirp(path.dirname(to));
-        fs.copyFileSync(from, to);
-      }
+        const { from, to } = stack.pop();
+        const stats = fs.statSync(from);
+    
+        if (stats.isDirectory()) {
+            mkdirp(to);
+            fs.readdirSync(from).forEach((name) => {
+                stack.push({
+                    from: path.join(from, name),
+                    to: path.join(to, rename(name)),
+                });
+            });
+        } else {
+            mkdirp(path.dirname(to));
+            fs.copyFileSync(from, to);
+        }
     }
-  }
-  
+}
+
+export function dist(path) {
+    return fileURLToPath(new URL(`./${path}`, import.meta.url).href);
+}

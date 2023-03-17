@@ -41,4 +41,4 @@ class PersonController {
     end
 }
 
-$addon-glob$.PersonController = PersonController()
+$addon-global$.PersonController = PersonController()

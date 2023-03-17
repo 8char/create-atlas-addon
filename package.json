@@ -1,18 +1,21 @@
 {
-  "name": "@atlasframework/create",
-  "version": "1.0.0",
-  "description": "A package for quickly creating addons with laux & AtlasFramework",
-  "bin": "./bin",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "create-atlas-addon",
+  "version": "1.0.4",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/8char/create-atlas-addon",
+    "directory": "packages/create-atlas-addon"
   },
-  "type": "module",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
+  "homepage": "https://discord.gg/glua",
+  "bin": "./bin.js",
+  "main": "./index.js",
   "dependencies": {
     "@clack/prompts": "^0.6.3",
     "kleur": "^4.1.5"
-  }
+  },
+  "scripts": {
+    "test": "pnpm build && uvu test"
+  },
+  "type": "module"
 }

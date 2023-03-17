@@ -4,6 +4,7 @@ import path from 'node:path';
 import * as p from '@clack/prompts';
 import { bold, cyan, grey } from 'kleur/colors';
 import { create } from './index.js';
+import { dist } from './utils.js';
 
 const { version } = JSON.parse(fs.readFileSync(new URL('package.json', import.meta.url), 'utf-8'));
 let cwd = process.argv[2] || '.';
@@ -47,8 +48,8 @@ const options = await p.group(
 			p.select({
 				message: 'Which AtlasFramework app template?',
 				// @ts-expect-error i have no idea what is going on here
-				options: fs.readdirSync('templates').map((dir) => {
-					const meta_file = `templates/${dir}/meta.json`;
+				options: fs.readdirSync(dist('templates')).map((dir) => {
+					const meta_file = dist(`templates/${dir}/meta.json`);
 					const { title, description } = JSON.parse(fs.readFileSync(meta_file, 'utf8'));
 
 					return {
@@ -110,6 +111,10 @@ const options = await p.group(
 	{ onCancel: () => process.exit(1) }
 );
 
+
+const s = p.spinner();
+s.start("Copying over template files...");
+
 await create(cwd, {
 	name: path.basename(path.resolve(cwd)),
 	template: /** @type {'skeleton'} */ (options.template),
@@ -119,6 +124,8 @@ await create(cwd, {
 	global: options.global,
 	acronym: options.acronym
 });
+
+s.stop("Copied over template files!")
 
 p.outro(`Your project is ready!`);
 

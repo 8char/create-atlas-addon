@@ -168,7 +168,7 @@ if (relative !== '') {
 }
 
 console.log(`  ${i++}: ${bold(cyan('git init && git add -A && git commit -m "Initial commit"'))} (optional)`);
-console.log(`  ${i++}: ${bold(cyan('laux workspace'))}`);
+console.log(`  ${i++}: ${bold(cyan('lauxc workspace'))}`);
 console.log(`  ${i++}: ${bold(cyan('Run your server!'))}`);
 
 console.log(`\nTo close the dev server, hit ${bold(cyan('Ctrl-C'))}`);

@@ -63,25 +63,41 @@ const options = await p.group(
         fancy_name: () =>
             p.text({
                 message: 'What should the "Fancy Name" name be?',
-                placeholder: 'My Addon'
+                placeholder: '  (e.g Comms Addon)',
+                validate: (value) => {
+                    if (value == "" ) return "A valid name must be passed, e.g Comms Addon"
+                }
             }),
 
 		underscore_name: () =>
 			p.text({
-				message: 'What should the underscore name be?',
-				placeholder: 'my_addon'
+				message: 'What should the file name be?',
+				placeholder: '  (e.g comms_addon)',
+                validate: (value) => {
+                    if (value === "") return "A valid name must be passed, e.g comms_addon";
+                    if (!/^[a-z_]+$/.test(value)) return "Name can only contain lowercase letters and underscores, e.g comms_addon"
+                }
 			}),
 
-		global: () =>
-			p.text({
-				message: 'What should the global variable be?',
-				placeholder: 'PersonAddon'
-			}),
+            global: () =>
+            p.text({
+              message: "What should the global variable be?",
+              placeholder: "  (e.g CommsAddon)",
+              validate: (value) => {
+                if (value === "") return "A valid name must be passed, e.g. CommsAddon";
+                if (!/^[a-zA-Z]+$/.test(value)) return "Name can only contain upper & lowercase letters, e.g. CommsAddon";
+              },
+            }),
+          
 
         acronym: () =>
 			p.text({
 				message: 'What should the acronym be?',
-				placeholder: 'MyAddon'
+				placeholder: '  (e.g CommsAddon)',
+                validate: (value) => {
+                  if (value === "") return "A valid acronym must be passed, e.g. CommsAddon";
+                  if (!/^[a-zA-Z]+$/.test(value)) return "Acronym can only contain upper & lowercase letters, e.g. CommsAddon";
+                },
 			}),
 
 		// features: () =>

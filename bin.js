@@ -134,7 +134,6 @@ s.start("Copying over template files...");
 await create(cwd, {
 	name: path.basename(path.resolve(cwd)),
 	template: /** @type {'skeleton'} */ (options.template),
-	types: options.types,
 	fancy_name: options.fancy_name,
 	underscore_name: options.underscore_name,
 	global: options.global,

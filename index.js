@@ -6,7 +6,9 @@ export async function create(cwd, options) {
 	mkdirp(cwd);
 
 	writeTemplateFiles(options, cwd);
-    fs.unlink(path.join(cwd, "meta.json"))
+    fs.unlink(path.join(cwd, "meta.json"), (err) => {
+        if (err) throw err;
+    })
 }
 
 function replaceInFiles(dirPath, searchValue, replaceValue) {
@@ -27,11 +29,11 @@ function replaceInFiles(dirPath, searchValue, replaceValue) {
 }
 
 function writeTemplateFiles(options, cwd) {
-	const dir = dist(`templates/${options.template}`)
-	copy(dir, cwd, (name) => name.replace('$addon-name-underscore$', options.underscore_name))
+	const dir = dist(`templates/${options.template}`);
+	copy(dir, cwd, (name) => name.replace('$addon-name-underscore$', options.underscore_name));
 
-    replaceInFiles(cwd, /\$addon-name-underscore\$/g,   options.underscore_name)
-    replaceInFiles(cwd, /\$addon-acronym\$/g,           options.acronym)
-    replaceInFiles(cwd, /\$addon-global\$/g,            options.global)
-    replaceInFiles(cwd, /\$addon-name\$/g,              options.fancy_name)
+    replaceInFiles(cwd, /\$addon-name-underscore\$/g,   options.underscore_name);
+    replaceInFiles(cwd, /\$addon-acronym\$/g,           options.acronym);
+    replaceInFiles(cwd, /\$addon-global\$/g,            options.global);
+    replaceInFiles(cwd, /\$addon-name\$/g,              options.fancy_name);
 }

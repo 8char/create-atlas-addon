@@ -23,4 +23,4 @@ class Person
     end
 end
 
-$addon-glob$.Person = Person
+$addon-global$.Person = Person

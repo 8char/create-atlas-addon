@@ -8,15 +8,15 @@ class Person
     _get _set age
     _get _set mood
 
-    constructor(fullName: string, age: number, mood: number) {
+    constructor(fullName: string, age: number, mood: number)
         self:setFullName(fullName or "John Smith")
         self:setAge(age or 18)
         self:setMood(age or self.ENUMS.Normal)
-    }
+    end
 
-    getHello() {
-        print(`Hello, my name is {self:getName()}, and I am {self:getAge()}`)
-    }
+    getHello()
+        return `Hello, my name is {self:getName()}, and I am {self:getAge()}`
+    end
 
     __type()
         return "$addon-global$.Person"

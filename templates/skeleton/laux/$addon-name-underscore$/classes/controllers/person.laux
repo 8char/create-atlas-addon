@@ -1,4 +1,4 @@
-class PersonController {
+class PersonController
     _get _set people
 
     contructor()
@@ -39,6 +39,6 @@ class PersonController {
     __type()
         return "$addon-global$.PersonController"
     end
-}
+end
 
 $addon-global$.PersonController = PersonController()

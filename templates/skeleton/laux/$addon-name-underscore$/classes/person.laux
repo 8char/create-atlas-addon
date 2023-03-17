@@ -1,4 +1,4 @@
-class Person {
+class Person
     static ENUMS = {
         HAPPY = 0,
         NORMAL = 1,
@@ -21,6 +21,6 @@ class Person {
     __type()
         return "$addon-global$.Person"
     end
-}
+end
 
 $addon-glob$.Person = Person

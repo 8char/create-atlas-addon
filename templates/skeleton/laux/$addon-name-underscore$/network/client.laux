@@ -25,4 +25,4 @@ class Network extends AtlasUI.Network
     end
 end
 
-SkillSystem.Network = Network()
+$addon-global$.Network = Network()
